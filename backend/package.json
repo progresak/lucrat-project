@@ -44,7 +44,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "jest": "^23.6.0",
     "jest-cli": "^23.6.0",
-    "moleculer-repl": "^0.5.3",
+    "moleculer-repl": "^0.6.4",
     "prettier": "^1.17.1",
     "supertest": "^4.0.2",
     "swagger-ui-express": "^4.0.2",

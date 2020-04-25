@@ -2,9 +2,6 @@
 import { Context, Service as MoleculerService } from 'moleculer';
 import { Action, Event, Method, Service } from 'moleculer-decorators';
 import { getConnection } from 'typeorm';
-// #endregion Global Imports
-
-// #region Local Imports
 import { PlanetRepository, WeaponRepository } from '@Repositories';
 import { CalculateMeta } from '@Meta';
 import { Planet, Weapon } from '@Entities';
@@ -76,37 +73,6 @@ export class PlanetService extends MoleculerService {
     }
 
     @Method
-    /**
-     * @swagger
-     *
-     *  /planet/Defend:
-     *    post:
-     *      description: Attacks to the planet with given weapon.
-     *      produces:
-     *        - application/json
-     *      consumes:
-     *        - application/json
-     *      parameters:
-     *        - in: body
-     *          name: params
-     *          schema:
-     *            type: object
-     *            required:
-     *              - weaponName
-     *              - planetName
-     *            properties:
-     *              weaponName:
-     *                type: string
-     *                example: Death Star
-     *              planetName:
-     *                type: string
-     *                example: Alderaan
-     *      responses:
-     *        200:
-     *          description: Example attack result
-     *        422:
-     *          description: Missing parameters
-     */
     public async DefendMethod(ctx: Context<IPlanet.DefendInDto>): Promise<IPlanet.DefendOutDto> {
         const { planetName, weaponName } = ctx.params;
 

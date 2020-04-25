@@ -1,1 +1,0 @@
-export { IAttack } from './IAttack';

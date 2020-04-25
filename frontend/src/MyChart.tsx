@@ -32,6 +32,7 @@ const MyChart: React.FC<MyChartProps> = ({ data }) => {
 		console.log('fuck');
 		return null;
 	}
+
 	const axes = [
 		{ primary: true, type: 'linear', position: 'bottom' },
 		{ type: 'linear', position: 'left' },

@@ -12,13 +12,6 @@ services:
     ports:
       - "3000:3000"
 
-  attack:
-    build: .
-    image: attack
-    env_file: docker-compose.env
-    environment:
-      SERVICES: attack
-
   history-mongo:
     image: mongo
     ports:

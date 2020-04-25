@@ -17,10 +17,7 @@ interface ReadedCandle {
     volume: string;
 }
 
-// #endregion Local Imports
 
-// #region Interface Imports
-import { IAttack } from '@Interfaces';
 import { Processor } from '@Repositories/Processor';
 import { Candle } from '@Interfaces/Candle';
 import * as fs from 'fs';
