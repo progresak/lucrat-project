@@ -1,0 +1,44 @@
+version: "3.0"
+
+services:
+
+  api:
+    build: .
+    image: api
+    env_file: docker-compose.env
+    environment:
+      SERVICES: api
+      PORT: 3000
+    ports:
+      - "3000:3000"
+
+  attack:
+    build: .
+    image: attack
+    env_file: docker-compose.env
+    environment:
+      SERVICES: attack
+
+  history-mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-volume:/data/db
+
+  planet:
+    build: .
+    image: planet
+    depends_on:
+      - history-mongo
+    links:
+      - history-mongo
+    env_file: docker-compose.env
+    environment:
+      SERVICES: planet
+      MONGO: history-mongo
+
+  nats-server:
+    image: nats:latest
+    ports:
+      - "4222:4222"
