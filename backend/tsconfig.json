@@ -1,23 +1,40 @@
 {
 	"compilerOptions": {
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-		"esModuleInterop": true,
-		"noImplicitAny": true,
-		"noImplicitReturns": true,
-		"noImplicitThis": true,
-		"strict": true,
-		"module": "commonjs",
 		"pretty": true,
 		"types": [
 			"jest",
 			"node"
 		],
-		"outDir": "dist",
-		"sourceMap": true,
-		"target": "es6",
 		"allowJs": true,
+
+		"module": "commonjs",
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"target": "es2019",
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": false,
+		"noImplicitReturns": true,
+		"skipLibCheck": true,
+		"declaration": false,
+		"noFallthroughCasesInSwitch": true,
+		"composite": false,
+		"noImplicitAny": true,
+		"moduleResolution": "node",
+		"lib": ["es2020"],
+		"sourceMap": true,
+		"emitDecoratorMetadata": true,
+//			"strict": true,
+		"strict": false,
+		"experimentalDecorators": true,
+		"outDir": "dist",
 		"baseUrl": ".",
+
+
+
+
 		"paths": {
 			"@MicroServices/*": [
 				"services/*"
@@ -49,8 +66,17 @@
 			"@Meta": [
 				"src/Meta"
 			],
-			"@Entities/*": [
-				"src/Entities/*"
+			"Entities/*": [
+				"src/entities/*"
+			],
+			"Resolvers/*": [
+				"src/resolvers/*"
+			],
+			"TypeDefs/*": [
+				"src/typeDefs/*"
+			],
+			"Graphql/*": [
+				"src/graphql/*"
 			],
 			"@Entities": [
 				"src/Entities"

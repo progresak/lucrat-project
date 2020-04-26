@@ -144,7 +144,7 @@ const brokerConfig: BrokerOptions = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     created(broker) {},
 
-    // Called after broker starte.
+    // Called after broker started.
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     started(broker) {},
 

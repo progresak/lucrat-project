@@ -56,7 +56,7 @@ export class ProducerService extends MoleculerService {
     public async startCandleFetching(ctx: Context): Promise<boolean> {
         this.connection.onReady(() => {
             this.connection.Stream.listen.getCandles((candle: STREAMING_CANDLE_RECORD) => {
-                console.log({ candle });
+                // console.log({ candle });
                 ctx.broadcast('producer.onNewCandle', { candle });
             });
             this.connection.Stream.subscribe

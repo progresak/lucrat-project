@@ -32,7 +32,8 @@
   "devDependencies": {
     "@pankod/pankod-cli": "^1.0.1",
     "@types/jest": "^23.1.1",
-    "@types/node": "^10.12.12",
+    "@types/lodash": "^4.14.150",
+    "@types/node": "^10.17.21",
     "@types/supertest": "^2.0.8",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
@@ -53,14 +54,17 @@
     "typescript": "^3.3.3333"
   },
   "dependencies": {
-    "@types/mongoose": "^5.7.12",
+    "@typegoose/typegoose": "^7.0.0",
+    "@types/graphql": "^14.5.0",
+    "@types/mongoose": "^5.7.13",
+    "apollo-server": "^2.12.0",
     "cors": "^2.8.5",
     "csv-parser": "^2.3.2",
     "express": "^4.16.4",
-    "graphql": "^15.0.0",
+    "graphql": "^14.1.1",
+    "lodash": "^4.17.15",
     "logger4": "^1.6.0",
     "moleculer": "^0.14.5",
-    "moleculer-apollo-server": "^0.3.0",
     "moleculer-db": "^0.8.7",
     "moleculer-db-adapter-mongoose": "^0.8.4",
     "moleculer-decorators": "^1.2.0",
@@ -71,6 +75,7 @@
     "sqlite3": "^4.1.1",
     "swagger-jsdoc": "^3.2.9",
     "tsconfig-paths": "^3.8.0",
+    "type-graphql": "^0.17.6",
     "typeorm": "^0.2.18",
     "xapi-node": "^2.2.7"
   },

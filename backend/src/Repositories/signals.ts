@@ -62,7 +62,7 @@ export const isEngulfing = (candles: Candle[], strong: number = 1): EngulfingTyp
     const backLow = Math.min(...backLows);
 
     if (backHigh < lastHigh && backLow < lastLow) {
-        console.log(type, { candles });
+        // console.log(type, { candles });
         return type;
     }
 

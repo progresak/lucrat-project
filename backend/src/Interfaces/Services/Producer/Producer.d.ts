@@ -1,6 +1,6 @@
 export namespace IProducer {
     export interface DefendInDto {
-        planetName: string;
+        historyName: string;
         weaponName: string;
     }
 }

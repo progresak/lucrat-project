@@ -3,7 +3,7 @@ import { getManager } from 'typeorm';
 // #endregion Global Imports
 
 // #region Local Imports
-import { Weapon } from '@Entities/Weapon';
+import { Weapon } from 'entities/Weapon';
 import { DecreaseAmmoOutDto } from '@Interfaces';
 import { getResource } from './Shared';
 // #endregion Local Imports

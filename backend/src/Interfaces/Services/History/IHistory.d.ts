@@ -1,11 +1,11 @@
-export namespace IPlanet {
+export namespace IHistory {
     export interface DefendInDto {
-        planetName: string;
+        historyName: string;
         weaponName: string;
     }
 
     export interface DefendOutDto {
         damage: number;
-        planetMessage: string;
+        historyMessage: string;
     }
 }

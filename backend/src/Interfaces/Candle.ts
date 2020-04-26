@@ -1,5 +1,3 @@
-import { Document } from 'mongoose';
-
 export interface Candle {
     low: number;
     high: number;
@@ -9,4 +7,3 @@ export interface Candle {
     symbol: string;
     timestamp: number;
 }
-export interface DocumentCandle extends Document {}

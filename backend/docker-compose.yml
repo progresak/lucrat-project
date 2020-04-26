@@ -19,16 +19,16 @@ services:
     volumes:
       - ./mongo-volume:/data/db
 
-  planet:
+  history:
     build: .
-    image: planet
+    image: history
     depends_on:
       - history-mongo
     links:
       - history-mongo
     env_file: docker-compose.env
     environment:
-      SERVICES: planet
+      SERVICES: history
       MONGO: history-mongo
 
   nats-server:

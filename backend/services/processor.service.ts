@@ -1,12 +1,5 @@
-// #region Global Imports
-import { Context, Service as MoleculerService } from 'moleculer';
-import { Action, Method, Service } from 'moleculer-decorators';
-import { getConnection } from 'typeorm';
-// #endregion Global Imports
-
-// #region Local Imports
-import { WeaponRepository } from '@Repositories';
-import { PlanetHelper, ProducerHelper } from '@ServiceHelpers';
+import { Service as MoleculerService } from 'moleculer';
+import { Action, Service } from 'moleculer-decorators';
 
 interface ReadedCandle {
     timestamp: string;
@@ -16,7 +9,6 @@ interface ReadedCandle {
     close: string;
     volume: string;
 }
-
 
 import { Processor } from '@Repositories/Processor';
 import { Candle } from '@Interfaces/Candle';
@@ -38,7 +30,7 @@ const setData = (onNewCandle: (candle: Candle) => void) => {
                 // __v: 0,
                 symbol: 'EURUSD',
             };
-
+            // ctx.broadcast('producer.onNewCandle', { datacandle });
             onNewCandle(datacandle);
         })
         .on('end', () => {
@@ -56,6 +48,7 @@ export class ProcessorService extends MoleculerService {
 
     public async started() {
         this.processor = new Processor();
+        // @ts-ignore
         this.processAlgorithm();
         // return await this.broker.call('processor.processAlgorithm');
     }

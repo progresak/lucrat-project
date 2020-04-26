@@ -1,46 +1,37 @@
-import ApiGateway from 'moleculer-web';
-import { ServiceSchema } from 'moleculer';
-import { ApolloService } from 'moleculer-apollo-server';
-import { resolvers, typeDefs } from '../src/GraphQL';
+import { Service as MoleculerService } from 'moleculer';
+import { Service } from 'moleculer-decorators';
+import { ApolloServer } from 'apollo-server';
+    import schema from 'Resolvers/schema';
 
-const ApiService: ServiceSchema = {
+@Service({
     name: 'api',
+})
+export class ApiService extends MoleculerService {
+    server!: ApolloServer;
 
-    mixins: [
-        ApiGateway,
-        ApolloService({
-            typeDefs,
-            resolvers,
-            routeOptions: {
-                path: '/graphql',
-                cors: true,
-                mappingPolicy: 'restrict',
-            },
-            serverOptions: {
-                tracing: true,
-                engine: {
-                    apiKey: process.env.APOLLO_ENGINE_KEY,
-                },
-            },
-        }),
-    ],
-    settings: {
-        port: process.env.PORT || 3000,
-        routes: [
-            {
-                aliases: {},
-                cors: {
-                    credentials: true,
-                    methods: ['GET', 'OPTIONS', 'POST'],
-                    origin: ['*'],
-                },
-                path: '/api',
-            },
-        ],
-        assets: {
-            folder: 'public',
-        },
-    },
-};
+    async started() {
+        this.name = 'api';
+        const server = new ApolloServer({
+            schema,
+            context: () => ({
+                broker: this.broker,
+            }),
+        });
+        this.server = server;
 
-export = ApiService;
+        // Check if port is set, otherwise default to 3000
+        const port = process.env.PORT || 3000;
+
+        // Start our server
+        await server.listen({ port }).then(({ url }) => {
+            this.broker.logger.info(`🚀  Apollo Server ready at ${url}`);
+        });
+    }
+
+    // Stopped handler
+    stopped() {
+        this.server.stop();
+    }
+}
+
+module.exports = ApiService;

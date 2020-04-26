@@ -1,2 +1,2 @@
-export { PlanetHelper } from '@ServiceHelpers/PlanetHelper';
+export { HistoryHelper } from '@ServiceHelpers/HistoryHelper';
 export { ProducerHelper } from '@ServiceHelpers/ProducerHelper';
