@@ -36,12 +36,20 @@ const brokerConfig: BrokerOptions = {
 
     // Define transporter.
     // More info: https://moleculer.services/docs/0.14/networking.html
-    transporter: {
-        type: 'TCP',
-        options: {
-            udpDiscovery: false,
-        },
-    },
+    transporter: 'TCP',
+    // transporter: {
+    //     type: 'AMQP',
+    //     options: {
+    //         url: 'amqp://localhost:5672',
+    //         eventTimeToLive: 5000,
+    //         prefetch: 1,
+    //         socketOptions: {
+    //             servername: process.env.RABBIT_SERVER_NAME,
+    //         },
+    //         // If true, queues will be autodeleted once service is stopped, i.e., queue listener is removed
+    //         autoDeleteQueues: true,
+    //     },
+    // },
 
     // Define a serializer.
     // Available values: "JSON", "Avro", "ProtoBuf", "MsgPack", "Notepack", "Thrift".

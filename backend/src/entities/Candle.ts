@@ -1,8 +1,9 @@
 import 'reflect-metadata';
 import { ObjectType, Field } from 'type-graphql';
-import { prop as Property, getModelForClass, DocumentType } from '@typegoose/typegoose';
+import { prop as Property, getModelForClass, DocumentType, index } from '@typegoose/typegoose';
 
 @ObjectType({ description: 'The Candles model' })
+@index({ timestamp: 1, symbol: 1 }, { unique: true })
 export class Candle {
     @Field()
     @Property({})
@@ -36,6 +37,7 @@ export class Candle {
     @Property({ required: true })
     timestamp: number;
 }
+
 export type CandleDocument = DocumentType<Candle>;
 
 export const CandlesModel = getModelForClass(Candle);

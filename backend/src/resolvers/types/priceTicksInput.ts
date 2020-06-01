@@ -1,9 +1,9 @@
 import { InputType, Field } from 'type-graphql';
-import { PriceTicks } from 'Entities/PriceTicks';
+import { PriceTick } from 'Entities/PriceTick';
 import { prop as Property } from '@typegoose/typegoose/lib/prop';
 
 @InputType()
-export class PriceTicksInput implements Partial<PriceTicks> {
+export class PriceTicksInput implements Partial<PriceTick> {
     @Field()
     @Property()
     bid: number;

@@ -1,17 +1,17 @@
 import 'reflect-metadata';
 import { Arg, Mutation, Query, Resolver } from 'type-graphql';
-import { PriceTicks, PriceTicksModel } from 'Entities/PriceTicks';
+import { PriceTick, PriceTicksModel } from 'Entities/PriceTick';
 import { PriceTicksInput } from 'Resolvers/types/priceTicksInput';
 
 @Resolver()
 export class PriceTicksResolver {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    @Query(_returns => PriceTicks, { nullable: false })
+    @Query(_returns => PriceTick, { nullable: false })
     async getPriceTick(@Arg('id') id: string) {
         return await PriceTicksModel.findById({ _id: id }).exec();
     }
 
-    @Query(() => [PriceTicks])
+    @Query(() => [PriceTick])
     async getPriceTicks() {
         return await PriceTicksModel.find().exec();
     }
@@ -23,8 +23,8 @@ export class PriceTicksResolver {
             .exec();
     }
 
-    @Mutation(() => PriceTicks)
-    async createPriceTick(@Arg('data') priceTick: PriceTicksInput): Promise<PriceTicks> {
+    @Mutation(() => PriceTick)
+    async createPriceTick(@Arg('data') priceTick: PriceTicksInput): Promise<PriceTick> {
         return (await PriceTicksModel.create(priceTick)).save();
     }
 

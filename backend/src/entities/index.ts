@@ -1,2 +1,2 @@
-export { PriceTicks } from './PriceTicks';
+export { PriceTick } from './PriceTick';
 export { Candle } from './Candle';

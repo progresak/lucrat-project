@@ -1,11 +1,5 @@
-// #region Global Imports
-import { getManager } from 'typeorm';
-// #endregion Global Imports
-
-// #region Local Imports
-import { History } from 'entities/History';
-import { DecreaseShieldOutDto } from '@Interfaces';
 import { getResource } from './Shared';
+import { History } from 'Entities/History';
 // #endregion Local Imports
 
 // #region Interface Imports
@@ -14,18 +8,5 @@ import { getResource } from './Shared';
 export namespace HistoryRepository {
     export const Get = async (historyName: string): Promise<History> => {
         return await getResource(History, { where: { name: historyName } });
-    };
-
-    export const DecreaseShield = async (
-        historyName: string,
-        remainingShield: number,
-    ): Promise<DecreaseShieldOutDto> => {
-        const history = await getResource(History, { where: { name: historyName } });
-
-        history.shield = remainingShield;
-
-        await getManager().save(history);
-
-        return { remainingShield: history.shield };
     };
 }

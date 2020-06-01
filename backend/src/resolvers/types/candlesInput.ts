@@ -1,10 +1,10 @@
 import { InputType, Field } from 'type-graphql';
 // import { Length } from 'class-validator';
-import { Candles } from 'Entities/Candles';
+import { Candle } from 'Entities/Candle';
 import { prop as Property } from '@typegoose/typegoose/lib/prop';
 
 @InputType()
-export class CandlesInput implements Partial<Candles> {
+export class CandlesInput implements Partial<Candle> {
     @Field()
     @Property()
     low: number;
