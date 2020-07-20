@@ -63,7 +63,7 @@
     "csv-parser": "^2.3.2",
     "express": "^4.16.4",
     "graphql": "^14.1.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "logger4": "^1.6.0",
     "moleculer": "^0.14.5",
     "moleculer-db": "^0.8.7",
