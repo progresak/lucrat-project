@@ -51,7 +51,7 @@ export class HistoryService extends MoleculerService {
     @Event()
     async 'producer.onNewPrice'(payload: { tickRecord: TickRecord }) {
         const { tickRecord } = payload;
-
+        console.log(payload);
         try {
             await this.broker.call('tickRecords.insertOrUpdate', tickRecord);
         } catch (e) {

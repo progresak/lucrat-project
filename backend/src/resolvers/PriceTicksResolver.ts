@@ -25,6 +25,7 @@ export class PriceTicksResolver {
 
     @Mutation(() => PriceTick)
     async createPriceTick(@Arg('data') priceTick: PriceTicksInput): Promise<PriceTick> {
+        // @ts-ignore
         return (await PriceTicksModel.create(priceTick)).save();
     }
 

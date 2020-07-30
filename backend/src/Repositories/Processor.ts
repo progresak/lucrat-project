@@ -3,6 +3,7 @@ import { Candle } from '@Interfaces/Candle';
 import { CandleDocument } from 'Entities/Candle';
 import { isEmpty } from 'lodash/fp';
 import { PriceTickDocument } from 'Entities/PriceTick';
+import { TradeStatus } from 'xapi-node';
 
 // const csv = require('csv-parser');
 // const fs = require('fs');
@@ -23,8 +24,15 @@ const getAvgFor = (candles: Candle[], lastMin: number) => {
     return validElements.reduce((total, { open }) => total + open, 0) / validElements.length;
 };
 
+interface OpenOrderProps {
+    symbol?: string;
+    buy?: boolean;
+    sl?: number;
+    tp?: number;
+}
+
 interface ProcessorActions {
-    openOrder?: (bid: number) => number;
+    openOrder?: (props?: OpenOrderProps) => Promise<TradeStatus>;
     closeOrder?: (orderId: number) => boolean; // TODO: maybe promisse?
     fetchOrders?: (symbol: string) => unknown[]; // pole otevřených orderů
 }
@@ -34,10 +42,11 @@ export class Processor {
     baseHistory: Candle[] = [];
     history: Candle[] = [];
     currentCandleIndex = 0; //??? index or timestamp or?
-    brokerActions = {
-        openOrder: null,
-        closeOrder: null,
-    };
+    private actions!: ProcessorActions;
+
+    constructor(actions: ProcessorActions) {
+        this.actions = actions;
+    }
 
     public counters = { isPinHammer: 0, isPinStar: 0 };
 
@@ -47,7 +56,6 @@ export class Processor {
 
     // tick records for last 10min lets say
     // pro aktuální pozorování trhu
-    private actions!: ProcessorActions;
 
     // eslint-disable-next-line @typescript-eslint/member-ordering
     priceTicksHistory: {}[] = [];
@@ -69,9 +77,6 @@ export class Processor {
         this.doAction();
     };
 
-    public setAcions = (actions: ProcessorActions) => {
-        this.actions = actions;
-    };
     public onNewPriceTick = (candle: PriceTickDocument) => {
         // this.calculate(candle);
         this.doAction();
@@ -79,6 +84,7 @@ export class Processor {
 
     public setBaseCandles = (candles: CandleDocument[]) => {
         this.baseHistory = candles;
+        console.log('CANDLS ARE', candles.length);
     };
     public process = (candlesBack = 100) => {
         // each(this.onNewCandle)(this.baseHistory.slice(-candlesBack));
@@ -147,6 +153,13 @@ export class Processor {
         }
         // isEngulfing(this.getLastCandles(3));
         if (last4min && this.getActualPrice() < last4min && !this.hasExistingOrder()) {
+            console.log(this.actions, this.actions.openOrder);
+            if (this.actions && this.actions.openOrder) {
+                // this.actions.openOrder({ symbol: 'EURUSD' }).then(({ order, requestStatus }) => {
+                //     console.log({ order, requestStatus });
+                // });
+            }
+
             this.placeOrder(this.getActualPrice());
         }
 

@@ -15,6 +15,7 @@ import { Processor } from '@Repositories/Processor';
 // import * as fs from 'fs';
 // import csv from 'csv-parser';
 import { CandleDocument } from 'Entities/Candle';
+import XtbConnector from '../src/modules/XtbConnector';
 // #endregion Interface Imports
 // const setData = (onNewCandle: (candle: Candle) => void) => {
 //     fs.createReadStream('data/eurusd.csv')
@@ -48,10 +49,18 @@ export class ProcessorService extends MoleculerService {
     public dependencies: ['candles'];
 
     private processor!: Processor;
+    private Connector: XtbConnector;
 
     public async started() {
-        this.processor = new Processor();
+        this.Connector = new XtbConnector();
+        this.processor = new Processor({
+            // @ts-ignore
+            openOrder: this.Connector.openOrder,
+            // closeOrder: this.Connector.closeOrder,
+            // fetchOrders: this.Connector.fetchOrders,
+        });
     }
+
     @Action()
     public async processAlgorithm() {
         // fetch candles from DB
@@ -65,12 +74,6 @@ export class ProcessorService extends MoleculerService {
         });
         // if (this.processor) {
         this.processor.setBaseCandles(dataCandles);
-
-        this.processor.setAcions({
-            openOrder: undefined,
-            closeOrder: undefined,
-            fetchOrders: undefined,
-        });
 
         this.processor.process(100);
 

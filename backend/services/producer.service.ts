@@ -1,11 +1,10 @@
 import { Context, Service as MoleculerService } from 'moleculer';
 import { compose, max, map } from 'lodash/fp';
 import { Action, Service } from 'moleculer-decorators';
-import Logger4 from 'logger4';
 import XAPI, { PERIOD_FIELD, STREAMING_CANDLE_RECORD } from 'xapi-node';
-import path from 'path';
 import { Candle } from 'Entities/Candle';
 import { FetchCandleResponse } from '@Interfaces';
+import XtbConnector from 'src/modules/XtbConnector';
 
 const getCandleFromArrCandle = (arrCandle: number[], symbol: string): Omit<Candle, 'id'> => {
     return {
@@ -36,19 +35,8 @@ export class ProducerService extends MoleculerService {
     private connection: XAPI;
 
     public async started() {
-        const config = {
-            accountId: '10250714',
-            password: 'iU#4pAQ{XRp3uZe98Jr(DCQfke',
-            type: 'demo',
-        };
-        const logger = new Logger4({
-            path: path.join(process.cwd(), 'logs/xtb'),
-            directorySizeLimitMB: 3000,
-        });
-
-        this.connection = new XAPI({ ...config, logger, host: 'ws.xtb.com' });
-        console.log(' This shold be FIRST');
-        this.connection.connect();
+        const Connector = new XtbConnector();
+        this.connection = Connector.getConnection();
     }
 
     @Action()
@@ -75,10 +63,10 @@ export class ProducerService extends MoleculerService {
                 'candles.getLastTimestamp',
                 { symbol },
             );
-
+            console.log(lastTimestamp);
             const { candles } = await this.connection.getPriceHistory({
                 symbol,
-                period: PERIOD_FIELD.PERIOD_M1,
+                period: PERIOD_FIELD.PERIOD_H1,
                 startUTC: lastTimestamp,
             });
 
