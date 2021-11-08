@@ -58,7 +58,7 @@
     "@types/graphql": "^14.5.0",
     "@types/mongoose": "^5.7.34",
     "amqplib": "^0.5.6",
-    "apollo-server": "^2.16.1",
+    "apollo-server": "^2.25.3",
     "cors": "^2.8.5",
     "csv-parser": "^2.3.3",
     "express": "^4.16.4",
